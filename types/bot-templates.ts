@@ -1,0 +1,338 @@
+import type { Bot } from "./bot"
+
+export interface BotTemplate {
+  id: string
+  name: string
+  description: string
+  category: string
+  icon: string
+  template: Partial<Bot>
+}
+
+// Define financial and prediction-focused bot templates
+export const botTemplates: BotTemplate[] = [
+  {
+    id: "financial-analyst",
+    name: "Financial Analyst",
+    description: "Analyzes financial data, market trends, and provides investment insights",
+    category: "Finance",
+    icon: "LineChart",
+    template: {
+      name: "Financial Analyst",
+      description: "Analyzes financial data, market trends, and provides investment insights",
+      icon: "LineChart",
+      skills: ["Data Analysis", "Market Research", "Investment Strategy", "Risk Assessment"],
+      behavior: {
+        responseStyle: "precise",
+        personality: "analytical",
+        knowledgeDomains: ["Finance", "Economics", "Markets", "Investing"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "stock-predictor",
+    name: "Stock Predictor",
+    description: "Analyzes stock market trends and provides potential future price movements",
+    category: "Predictions",
+    icon: "TrendingUp",
+    template: {
+      name: "Stock Predictor",
+      description: "Analyzes stock market trends and provides potential future price movements",
+      icon: "TrendingUp",
+      skills: [
+        "Technical Analysis",
+        "Pattern Recognition",
+        "Market Sentiment Analysis",
+        "Historical Data Interpretation",
+      ],
+      behavior: {
+        responseStyle: "balanced",
+        personality: "analytical",
+        knowledgeDomains: ["Stock Markets", "Technical Analysis", "Market Psychology", "Trading Patterns"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "financial-planner",
+    name: "Financial Planner",
+    description: "Helps with personal finance, budgeting, and financial goal planning",
+    category: "Finance",
+    icon: "PiggyBank",
+    template: {
+      name: "Financial Planner",
+      description: "Helps with personal finance, budgeting, and financial goal planning",
+      icon: "PiggyBank",
+      skills: ["Budget Creation", "Savings Planning", "Debt Management", "Investment Basics"],
+      behavior: {
+        responseStyle: "balanced",
+        personality: "supportive",
+        knowledgeDomains: ["Personal Finance", "Budgeting", "Financial Planning", "Investment Basics"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "crypto-analyst",
+    name: "Crypto Analyst",
+    description: "Specializes in cryptocurrency analysis, trends, and market movements",
+    category: "Finance",
+    icon: "Bitcoin",
+    template: {
+      name: "Crypto Analyst",
+      description: "Specializes in cryptocurrency analysis, trends, and market movements",
+      icon: "Bitcoin",
+      skills: ["Crypto Market Analysis", "Blockchain Technology", "Token Evaluation", "DeFi Understanding"],
+      behavior: {
+        responseStyle: "precise",
+        personality: "technical",
+        knowledgeDomains: ["Cryptocurrency", "Blockchain", "DeFi", "Digital Assets"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "market-predictor",
+    name: "Market Predictor",
+    description: "Forecasts potential market movements based on economic indicators and trends",
+    category: "Predictions",
+    icon: "Activity",
+    template: {
+      name: "Market Predictor",
+      description: "Forecasts potential market movements based on economic indicators and trends",
+      icon: "Activity",
+      skills: ["Economic Analysis", "Trend Forecasting", "Indicator Interpretation", "Scenario Modeling"],
+      behavior: {
+        responseStyle: "balanced",
+        personality: "analytical",
+        knowledgeDomains: ["Market Forecasting", "Economic Indicators", "Global Markets", "Trend Analysis"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "options-strategist",
+    name: "Options Strategist",
+    description: "Specializes in options trading strategies and risk management",
+    category: "Finance",
+    icon: "GitBranch",
+    template: {
+      name: "Options Strategist",
+      description: "Specializes in options trading strategies and risk management",
+      icon: "GitBranch",
+      skills: ["Options Analysis", "Strategy Development", "Risk Assessment", "Greeks Understanding"],
+      behavior: {
+        responseStyle: "precise",
+        personality: "strategic",
+        knowledgeDomains: ["Options Trading", "Derivatives", "Risk Management", "Market Volatility"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "economic-forecaster",
+    name: "Economic Forecaster",
+    description: "Predicts economic trends, inflation, and policy impacts",
+    category: "Predictions",
+    icon: "TrendingDown",
+    template: {
+      name: "Economic Forecaster",
+      description: "Predicts economic trends, inflation, and policy impacts",
+      icon: "TrendingDown",
+      skills: ["Macroeconomic Analysis", "Policy Impact Assessment", "Inflation Forecasting", "Economic Modeling"],
+      behavior: {
+        responseStyle: "balanced",
+        personality: "analytical",
+        knowledgeDomains: ["Macroeconomics", "Monetary Policy", "Fiscal Policy", "Global Economics"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "forex-analyst",
+    name: "Forex Analyst",
+    description: "Analyzes currency markets and provides exchange rate insights",
+    category: "Finance",
+    icon: "DollarSign",
+    template: {
+      name: "Forex Analyst",
+      description: "Analyzes currency markets and provides exchange rate insights",
+      icon: "DollarSign",
+      skills: ["Currency Analysis", "Exchange Rate Forecasting", "Global Economic Impact", "Technical Analysis"],
+      behavior: {
+        responseStyle: "precise",
+        personality: "analytical",
+        knowledgeDomains: ["Forex Markets", "Currency Trading", "International Economics", "Central Banks"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "earnings-predictor",
+    name: "Earnings Predictor",
+    description: "Forecasts company earnings and financial performance",
+    category: "Predictions",
+    icon: "BarChart",
+    template: {
+      name: "Earnings Predictor",
+      description: "Forecasts company earnings and financial performance",
+      icon: "BarChart",
+      skills: ["Financial Statement Analysis", "Revenue Forecasting", "Industry Benchmarking", "Growth Modeling"],
+      behavior: {
+        responseStyle: "precise",
+        personality: "analytical",
+        knowledgeDomains: ["Corporate Finance", "Financial Reporting", "Industry Analysis", "Business Performance"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "risk-manager",
+    name: "Risk Manager",
+    description: "Assesses financial risks and provides mitigation strategies",
+    category: "Finance",
+    icon: "Shield",
+    template: {
+      name: "Risk Manager",
+      description: "Assesses financial risks and provides mitigation strategies",
+      icon: "Shield",
+      skills: ["Risk Assessment", "Portfolio Protection", "Hedging Strategies", "Scenario Analysis"],
+      behavior: {
+        responseStyle: "precise",
+        personality: "cautious",
+        knowledgeDomains: ["Risk Management", "Portfolio Theory", "Hedging", "Financial Protection"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "sector-analyst",
+    name: "Sector Analyst",
+    description: "Specializes in analyzing specific market sectors and industry trends",
+    category: "Finance",
+    icon: "Layers",
+    template: {
+      name: "Sector Analyst",
+      description: "Specializes in analyzing specific market sectors and industry trends",
+      icon: "Layers",
+      skills: ["Sector Analysis", "Industry Comparison", "Competitive Assessment", "Trend Identification"],
+      behavior: {
+        responseStyle: "balanced",
+        personality: "analytical",
+        knowledgeDomains: ["Industry Analysis", "Sector Rotation", "Market Segments", "Competitive Landscape"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "commodity-predictor",
+    name: "Commodity Predictor",
+    description: "Forecasts commodity price movements and supply/demand dynamics",
+    category: "Predictions",
+    icon: "Package",
+    template: {
+      name: "Commodity Predictor",
+      description: "Forecasts commodity price movements and supply/demand dynamics",
+      icon: "Package",
+      skills: [
+        "Supply/Demand Analysis",
+        "Price Forecasting",
+        "Seasonal Pattern Recognition",
+        "Geopolitical Impact Assessment",
+      ],
+      behavior: {
+        responseStyle: "balanced",
+        personality: "analytical",
+        knowledgeDomains: ["Commodity Markets", "Natural Resources", "Global Trade", "Supply Chains"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "portfolio-optimizer",
+    name: "Portfolio Optimizer",
+    description: "Helps optimize investment portfolios for risk and return",
+    category: "Finance",
+    icon: "PieChart",
+    template: {
+      name: "Portfolio Optimizer",
+      description: "Helps optimize investment portfolios for risk and return",
+      icon: "PieChart",
+      skills: ["Asset Allocation", "Diversification Strategy", "Risk-Return Optimization", "Rebalancing Strategy"],
+      behavior: {
+        responseStyle: "precise",
+        personality: "methodical",
+        knowledgeDomains: [
+          "Portfolio Management",
+          "Asset Allocation",
+          "Modern Portfolio Theory",
+          "Investment Strategy",
+        ],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "sentiment-analyzer",
+    name: "Market Sentiment Analyzer",
+    description: "Analyzes market sentiment and social media impact on financial markets",
+    category: "Predictions",
+    icon: "MessageCircle",
+    template: {
+      name: "Market Sentiment Analyzer",
+      description: "Analyzes market sentiment and social media impact on financial markets",
+      icon: "MessageCircle",
+      skills: ["Sentiment Analysis", "Social Media Monitoring", "News Impact Assessment", "Trend Correlation"],
+      behavior: {
+        responseStyle: "balanced",
+        personality: "perceptive",
+        knowledgeDomains: ["Market Psychology", "Behavioral Finance", "Social Media Analysis", "News Analytics"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "tax-advisor",
+    name: "Tax Advisor",
+    description: "Provides tax planning strategies and financial optimization",
+    category: "Finance",
+    icon: "FileText",
+    template: {
+      name: "Tax Advisor",
+      description: "Provides tax planning strategies and financial optimization",
+      icon: "FileText",
+      skills: ["Tax Planning", "Deduction Optimization", "Regulatory Compliance", "Financial Structuring"],
+      behavior: {
+        responseStyle: "precise",
+        personality: "meticulous",
+        knowledgeDomains: ["Taxation", "Financial Planning", "Regulatory Compliance", "Tax Efficiency"],
+      },
+      enabled: true,
+    },
+  },
+  {
+    id: "technical-analyst",
+    name: "Technical Analyst",
+    description: "Specializes in technical analysis of price charts and patterns",
+    category: "Finance",
+    icon: "TrendingUp",
+    template: {
+      name: "Technical Analyst",
+      description: "Specializes in technical analysis of price charts and patterns",
+      icon: "TrendingUp",
+      skills: [
+        "Chart Pattern Recognition",
+        "Indicator Analysis",
+        "Support/Resistance Identification",
+        "Trend Analysis",
+      ],
+      behavior: {
+        responseStyle: "precise",
+        personality: "methodical",
+        knowledgeDomains: ["Technical Analysis", "Chart Patterns", "Trading Indicators", "Price Action"],
+      },
+      enabled: true,
+    },
+  },
+]

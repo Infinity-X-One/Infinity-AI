@@ -1,0 +1,732 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ensure background is always black, even during page transitions */
+html,
+body,
+#__next {
+  background-color: #000000 !important;
+  min-height: 100vh;
+}
+
+/* Force black background during page transitions */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-color: #000000;
+}
+
+:root {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 3%;
+  --card-foreground: 0 0% 100%;
+  --popover: 0 0% 3%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 142 100% 50%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 142 100% 15%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 100%;
+  --accent: 142 100% 15%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 100% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 142 100% 15%;
+  --input: 0 0% 10%;
+  --ring: 142 100% 50%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 3%;
+  --card-foreground: 0 0% 100%;
+  --popover: 0 0% 3%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 142 100% 50%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 142 100% 15%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 100%;
+  --accent: 142 100% 15%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 100% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 142 100% 15%;
+  --input: 0 0% 10%;
+  --ring: 142 100% 50%;
+}
+
+* {
+  @apply border-border;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+}
+
+body {
+  background-color: black;
+  color: white;
+  @apply bg-background text-foreground relative;
+  color: #ffffff;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: #000000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%2332a852' fill-opacity='0.05' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.chat-area {
+  position: relative;
+  isolation: isolate; /* Create a new stacking context */
+}
+
+/* Hexagon background pattern */
+.chat-area::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%2300ff4c' fill-opacity='0.05' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Bot management page specific styles */
+.bot-management-page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+}
+
+.bot-management-page::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%2300ff4c' fill-opacity='0.05' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+}
+
+/* ENHANCED SIDEBAR STYLING - FORCE BLACK BACKGROUND */
+.sidebar,
+[role="complementary"],
+.w-64,
+.mobile-sidebar,
+.mobile-sidebar.open {
+  background-color: #000000 !important;
+  position: relative;
+  isolation: isolate;
+  z-index: 10;
+}
+
+.sidebar::before,
+[role="complementary"]::before,
+.w-64::before,
+.mobile-sidebar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #000000 !important;
+  z-index: -1;
+}
+
+/* Ensure all sidebar children have black background */
+.sidebar > *,
+[role="complementary"] > *,
+.w-64 > *,
+.mobile-sidebar > * {
+  background-color: #000000 !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure sidebar buttons have black background */
+.sidebar button,
+[role="complementary"] button,
+.w-64 button,
+.mobile-sidebar button {
+  background-color: #000000 !important;
+}
+
+/* Ensure sidebar buttons hover state */
+.sidebar button:hover,
+[role="complementary"] button:hover,
+.w-64 button:hover,
+.mobile-sidebar button:hover {
+  background-color: rgba(0, 255, 76, 0.1) !important;
+}
+
+/* Hexagon grid with perimeter effect */
+.hexagon-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: transparent;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hexagon-grid::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  /* Perimeter glow effect */
+  background-image: radial-gradient(
+      circle at center,
+      transparent 0%,
+      transparent 60%,
+      rgba(0, 255, 76, 0.08) 80%,
+      rgba(0, 255, 76, 0.12) 100%
+    ), /* Hexagon grid patterns */
+    repeating-linear-gradient(
+      60deg,
+      rgba(0, 255, 76, 0.05) 0,
+      rgba(0, 255, 76, 0.05) 1px,
+      transparent 1px,
+      transparent 30px
+    ),
+    repeating-linear-gradient(
+      120deg,
+      rgba(0, 255, 76, 0.05) 0,
+      rgba(0, 255, 76, 0.05) 1px,
+      transparent 1px,
+      transparent 30px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 76, 0.05) 0,
+      rgba(0, 255, 76, 0.05) 1px,
+      transparent 1px,
+      transparent 30px
+    );
+  /* Removed the rotation animation */
+  will-change: transform;
+}
+
+/* Additional hexagon overlay for more visibility */
+.hexagon-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  /* Larger hexagons */
+  background-image: repeating-linear-gradient(
+      60deg,
+      rgba(0, 255, 76, 0.03) 0,
+      rgba(0, 255, 76, 0.03) 2px,
+      transparent 2px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      120deg,
+      rgba(0, 255, 76, 0.03) 0,
+      rgba(0, 255, 76, 0.03) 2px,
+      transparent 2px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 76, 0.03) 0,
+      rgba(0, 255, 76, 0.03) 2px,
+      transparent 2px,
+      transparent 60px
+    );
+  pointer-events: none;
+  background-attachment: fixed;
+}
+
+.hexagon-glow {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 255, 76, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+  animation: pulse 8s infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Animation for the inner glow */
+@keyframes pulseGlow {
+  0% {
+    opacity: 0.5;
+    box-shadow: inset 0 0 15px 2px rgba(0, 255, 76, 0.2);
+  }
+  100% {
+    opacity: 1;
+    box-shadow: inset 0 0 20px 4px rgba(0, 255, 76, 0.4);
+  }
+}
+
+/* Add this to your existing CSS */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 255, 76, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 255, 76, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 255, 76, 0.5);
+  }
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.neon-green-text {
+  color: #00ff4c;
+  text-shadow: 0 0 5px rgba(0, 255, 76, 0.5), 0 0 10px rgba(0, 255, 76, 0.3);
+}
+
+.neon-green-border {
+  border-color: #00ff4c;
+  box-shadow: 0 0 5px rgba(0, 255, 76, 0.5), 0 0 10px rgba(0, 255, 76, 0.3);
+}
+
+.neon-gradient {
+  background: linear-gradient(90deg, #00ff4c 0%, #39ff14 100%);
+}
+
+.neon-button {
+  background: linear-gradient(90deg, #00ff4c 0%, #39ff14 100%);
+  color: #000000;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 255, 76, 0.5);
+}
+
+.neon-button:hover {
+  background: linear-gradient(90deg, #39ff14 0%, #00ff4c 100%);
+  box-shadow: 0 0 15px rgba(0, 255, 76, 0.7);
+}
+
+.neon-outline {
+  background: transparent;
+  border: 1px solid #00ff4c;
+  color: white;
+  box-shadow: 0 0 5px rgba(0, 255, 76, 0.5);
+}
+
+.neon-outline:hover {
+  background: rgba(0, 255, 76, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 76, 0.7);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  /* Ensure proper sizing for mobile devices */
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    overscroll-behavior: none;
+  }
+
+  /* Fix header layout on mobile */
+  header {
+    padding-left: 8px;
+    padding-right: 8px;
+    height: 53px;
+  }
+
+  /* Fix logo display on mobile */
+  .logo-container svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Improve button layout on small screens */
+  .chat-area .hide-scrollbar {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Fix sidebar animation on mobile */
+  .mobile-sidebar {
+    will-change: transform;
+    background-color: #000000 !important;
+  }
+
+  /* Ensure proper sizing for mobile dialogs */
+  [role="dialog"] {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    margin: 0 auto;
+  }
+
+  /* Improve touch targets */
+  button,
+  .button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Ensure chat area takes full height */
+  .chat-area {
+    height: calc(100% - 53px);
+    margin-top: 53px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Fix input area on mobile */
+  .chat-area .border-t {
+    padding: 8px;
+  }
+
+  /* Fix sidebar logo on mobile */
+  .sidebar .infinity-logo {
+    transform: scale(0.8);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* Fix dropdown menus on mobile */
+  .dropdown-menu-content {
+    min-width: 200px;
+    right: 0;
+    left: auto;
+  }
+}
+
+/* Fix safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  header {
+    padding-top: max(env(safe-area-inset-top), 0px);
+    height: calc(53px + env(safe-area-inset-top));
+  }
+
+  .chat-area {
+    height: calc(100% - 53px - env(safe-area-inset-top));
+    margin-top: calc(53px + env(safe-area-inset-top));
+  }
+}
+
+/* Improve mobile menu button touch targets */
+@media (max-width: 640px) {
+  .mobile-menu-button {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Fix sidebar positioning on mobile */
+  .sidebar-container {
+    top: 53px;
+    height: calc(100% - 53px);
+  }
+
+  /* Ensure content doesn't overflow on mobile */
+  .overflow-hidden-mobile {
+    overflow: hidden;
+  }
+
+  /* Fix button text size on mobile */
+  button,
+  .button {
+    font-size: 14px;
+  }
+}
+
+/* Add this class for the sidebar toggle tab */
+.sidebar-toggle-tab {
+  animation: pulse-glow 2s infinite;
+}
+
+/* PWA install prompt */
+.pwa-install-prompt {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid #00ff4c33;
+  border-radius: 8px;
+  padding: 16px;
+  z-index: 100;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 255, 76, 0.2);
+}
+
+/* Hide scrollbar but allow scrolling */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Tap highlight color for mobile */
+* {
+  -webkit-tap-highlight-color: rgba(0, 255, 76, 0.2);
+}
+
+/* Prevent text selection on buttons */
+button,
+.button {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Improve touch targets for mobile */
+@media (max-width: 640px) {
+  button,
+  .button,
+  a,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Prevent iOS zoom on input focus */
+@media screen and (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* Improve mobile dialog positioning */
+@media (max-width: 640px) {
+  [role="dialog"] {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 90vw;
+  }
+}
+
+/* Add safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Improve mobile responsiveness by adding these styles at the end of the file */
+
+/* Animation for the sidebar pull tab */
+@keyframes pulse-subtle {
+  0% {
+    transform: translateX(0);
+    box-shadow: 0 0 5px rgba(0, 255, 76, 0.5);
+  }
+  50% {
+    transform: translateX(3px);
+    box-shadow: 0 0 10px rgba(0, 255, 76, 0.7);
+  }
+  100% {
+    transform: translateX(0);
+    box-shadow: 0 0 5px rgba(0, 255, 76, 0.5);
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s infinite ease-in-out;
+}
+
+/* Make header visible on mobile */
+@media (max-width: 640px) {
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    height: 53px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    background-color: black;
+    border-bottom: 1px solid #00ff4c33;
+  }
+}
+
+/* Add these mobile-specific utility classes */
+
+/* Mobile-specific utilities */
+@media (max-width: 640px) {
+  .mobile-touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .mobile-padding {
+    padding: 1rem !important;
+  }
+
+  .mobile-text {
+    font-size: 16px !important;
+  }
+}
+
+/* Add an extra small breakpoint */
+@media (min-width: 400px) {
+  .xs\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Improve scrolling on mobile */
+html,
+body {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent text zoom on mobile */
+input,
+textarea,
+select,
+button {
+  font-size: 16px;
+}
+
+/* Ensure consistent sidebar styling */
+.mobile-sidebar,
+.w-64 {
+  background-color: #000000 !important;
+  border-right: 1px solid rgba(0, 255, 76, 0.2);
+}
+
+.mobile-sidebar button,
+.w-64 button {
+  background-color: #000000 !important;
+  color: white;
+  border-color: rgba(0, 255, 76, 0.8);
+}
+
+.mobile-sidebar button:hover,
+.w-64 button:hover {
+  background-color: rgba(0, 255, 76, 0.1) !important;
+}
+
+/* Force black background on sidebar container */
+.sidebar-container {
+  background-color: #000000 !important;
+}
+
+/* Force black background on all sidebar elements */
+.sidebar-container * {
+  background-color: #000000 !important;
+}
+
+/* Force black background on sidebar buttons */
+.sidebar-container button {
+  background-color: #000000 !important;
+}
+
+/* Force black background on sidebar button hover */
+.sidebar-container button:hover {
+  background-color: rgba(0, 255, 76, 0.1) !important;
+}
+
+/* Fix chat input positioning on mobile */
+@media (max-width: 640px) {
+  .chat-area {
+    padding-bottom: 70px; /* Add padding to account for mobile navigation */
+  }
+
+  /* Ensure the input area is visible above mobile navigation */
+  .chat-area .border-t {
+    position: relative;
+    z-index: 40;
+    background-color: black;
+  }
+}
+
+/* Improve mobile logo display */
+@media (max-width: 640px) {
+  .logo-container {
+    transform: scale(0.85);
+    transform-origin: left center;
+  }
+}
