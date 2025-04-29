@@ -147,7 +147,7 @@ export default function CriticalNewsView() {
                   {news.confidence}% Confidence
                 </Badge>
               </div>
-              <p className="text-white text-sm">{news.headline}</p>
+              <p className="text-white text-sm line-clamp-2">{news.headline}</p>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">

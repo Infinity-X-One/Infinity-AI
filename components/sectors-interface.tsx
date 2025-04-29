@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useRouter } from "next/navigation"
 import Sidebar from "@/components/sidebar"
 import Header from "@/components/header"
@@ -10,6 +10,7 @@ import SectorCard from "@/components/sector-card"
 import { sectors } from "@/data/sectors"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
 export default function SectorsInterface() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
@@ -19,6 +20,33 @@ export default function SectorsInterface() {
   const [selectedSector, setSelectedSector] = useState<string | null>(null)
   const isMobile = useMobile()
   const router = useRouter()
+
+  const [activeCategoryFilter, setActiveCategoryFilter] = useState<string | null>(null)
+
+  // Extract unique categories from sectors
+  const sectorCategories = useMemo(() => {
+    const categories = sectors.map((sector) => {
+      // Extract category from sector.id or use a mapping
+      if (sector.id.includes("-")) {
+        return sector.id.split("-")[0].charAt(0).toUpperCase() + sector.id.split("-")[0].slice(1)
+      }
+      return sector.id.charAt(0).toUpperCase() + sector.id.slice(1)
+    })
+    return Array.from(new Set(categories))
+  }, [])
+
+  // Filter sectors based on search query and active category
+  const filteredSectors = useMemo(() => {
+    return sectors.filter((sector) => {
+      const matchesSearch = sector.name.toLowerCase().includes(searchQuery.toLowerCase())
+      const matchesCategory =
+        !activeCategoryFilter ||
+        (sector.id.includes("-")
+          ? sector.id.split("-")[0].toLowerCase() === activeCategoryFilter.toLowerCase()
+          : sector.id.toLowerCase() === activeCategoryFilter.toLowerCase())
+      return matchesSearch && matchesCategory
+    })
+  }, [sectors, searchQuery, activeCategoryFilter])
 
   // Close sidebar on mobile by default
   useEffect(() => {
@@ -32,8 +60,6 @@ export default function SectorsInterface() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
   }
-
-  const filteredSectors = sectors.filter((sector) => sector.name.toLowerCase().includes(searchQuery.toLowerCase()))
 
   const handleSectorClick = (sectorId: string) => {
     setSelectedSector(sectorId)
@@ -87,12 +113,17 @@ export default function SectorsInterface() {
         />
 
         <div className="flex-1 overflow-hidden pt-[53px] bg-black">
+          {/* Hexagon Grid and Overlay - Using the site's consistent styling */}
+          <div className="hexagon-grid"></div>
+          <div className="hexagon-overlay"></div>
+          <div className="hexagon-glow"></div>
+
           <div className="h-full flex flex-col md:flex-row">
             {/* Sectors list panel */}
             <div
               className={`w-full md:w-1/2 lg:w-2/5 h-full overflow-y-auto ${selectedSector && isMobile ? "hidden" : "block"}`}
             >
-              <div className="p-4 bg-black">
+              <div className="p-4 bg-black relative z-10">
                 <h1 className="text-2xl font-bold text-white mb-4">Market Sectors</h1>
 
                 {/* Search bar */}
@@ -107,6 +138,29 @@ export default function SectorsInterface() {
                   <Search className="absolute left-3 top-2.5 h-5 w-5 text-[#00ff4c80]" />
                 </div>
 
+                {/* Sector Categories */}
+                <div className="mb-6 flex flex-wrap gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className={`border-[#00ff4c33] hover:border-[#00ff4c] hover:bg-[#00ff4c15] text-white ${!activeCategoryFilter ? "bg-[#00ff4c15] border-[#00ff4c]" : ""}`}
+                    onClick={() => setActiveCategoryFilter(null)}
+                  >
+                    All Sectors
+                  </Button>
+                  {sectorCategories.map((category) => (
+                    <Button
+                      key={category}
+                      variant="outline"
+                      size="sm"
+                      className={`border-[#00ff4c33] hover:border-[#00ff4c] hover:bg-[#00ff4c15] text-white ${activeCategoryFilter === category ? "bg-[#00ff4c15] border-[#00ff4c]" : ""}`}
+                      onClick={() => setActiveCategoryFilter(category)}
+                    >
+                      {category}
+                    </Button>
+                  ))}
+                </div>
+
                 {/* Sectors grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {filteredSectors.map((sector) => (
@@ -118,10 +172,10 @@ export default function SectorsInterface() {
 
             {/* Chat area for selected sector */}
             <div
-              className={`w-full md:w-1/2 lg:w-3/5 h-full bg-black border-l border-[#00ff4c33] ${selectedSector || !isMobile ? "block" : "hidden"}`}
+              className={`w-full md:w-1/2 lg:w-3/5 h-full bg-black border-l border-[#00ff4c33] relative ${selectedSector || !isMobile ? "block" : "hidden"}`}
             >
               {selectedSector ? (
-                <div className="h-full flex flex-col">
+                <div className="h-full flex flex-col relative z-10">
                   {/* Sector chat header */}
                   <div className="p-4 border-b border-[#00ff4c33] flex items-center">
                     <button
@@ -149,7 +203,7 @@ export default function SectorsInterface() {
                   </div>
 
                   {/* Chat messages area */}
-                  <div className="flex-1 overflow-y-auto p-4">
+                  <div className="flex-1 overflow-y-auto p-4 chat-area">
                     <div className="flex flex-col space-y-4">
                       {/* Bot welcome message */}
                       <div className="flex items-start">

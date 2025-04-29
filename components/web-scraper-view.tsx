@@ -116,12 +116,12 @@ export default function WebScraperView() {
 
       {/* Search Bar */}
       <div className="relative mb-6">
-        <div className="flex">
+        <div className="flex flex-col sm:flex-row gap-2">
           <div className="relative flex-grow">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#00ff4c]" size={18} />
             <Input
               placeholder="Enter your financial intelligence query..."
-              className="pl-10 pr-24 py-6 bg-black/50 border-[#00ff4c33] focus:border-[#00ff4c] text-white text-lg"
+              className="pl-10 pr-4 py-5 sm:py-6 bg-black/50 border-[#00ff4c33] focus:border-[#00ff4c] text-white text-base sm:text-lg"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -130,7 +130,7 @@ export default function WebScraperView() {
           <Button
             onClick={handleSearch}
             disabled={isSearching || !searchQuery.trim()}
-            className="ml-2 neon-button flex items-center gap-2 min-w-[120px]"
+            className="ml-0 sm:ml-2 neon-button flex items-center gap-2 min-w-[120px]"
           >
             {isSearching ? (
               "Searching..."
@@ -151,12 +151,12 @@ export default function WebScraperView() {
             <Button
               key={index}
               variant="outline"
-              className={`bg-black/50 border-[#00ff4c33] hover:border-[#00ff4c] text-white hover:bg-[#00ff4c15] text-sm ${
+              className={`bg-black/50 border-[#00ff4c33] hover:border-[#00ff4c] text-white hover:bg-[#00ff4c15] text-xs sm:text-sm ${
                 activePrompt === prompt ? "border-[#00ff4c] bg-[#00ff4c15]" : ""
               }`}
               onClick={() => handlePromptClick(prompt)}
             >
-              {prompt}
+              <span className="line-clamp-1">{prompt}</span>
             </Button>
           ))}
         </div>
@@ -168,13 +168,13 @@ export default function WebScraperView() {
           <CardTitle className="text-[#00ff4c] text-xl">What is Web Scraping?</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
             <div>
-              <p className="text-white mb-4">
+              <p className="text-white mb-4 text-sm sm:text-base">
                 Web scraping is the process of extracting data from websites automatically. Our advanced AI-powered
                 scraper:
               </p>
-              <ul className="space-y-2 text-white">
+              <ul className="space-y-2 text-white text-sm sm:text-base">
                 <li className="flex items-start">
                   <div className="text-[#00ff4c] mr-2">•</div>
                   <span>Analyzes thousands of financial sources in real-time</span>
@@ -199,7 +199,7 @@ export default function WebScraperView() {
                   <TrendingUp size={18} className="text-[#00ff4c] mr-2" />
                   <h3 className="text-white font-medium">Speed Advantage</h3>
                 </div>
-                <p className="text-white text-sm opacity-80">
+                <p className="text-white text-xs sm:text-sm opacity-80">
                   Get market-moving information 15-45 minutes before it appears in mainstream financial media
                 </p>
               </div>
@@ -208,7 +208,7 @@ export default function WebScraperView() {
                   <Shield size={18} className="text-[#00ff4c] mr-2" />
                   <h3 className="text-white font-medium">Information Edge</h3>
                 </div>
-                <p className="text-white text-sm opacity-80">
+                <p className="text-white text-xs sm:text-sm opacity-80">
                   Access data from premium sources, SEC filings, earnings calls, and institutional research
                 </p>
               </div>
@@ -217,7 +217,7 @@ export default function WebScraperView() {
                   <BarChart2 size={18} className="text-[#00ff4c] mr-2" />
                   <h3 className="text-white font-medium">Pattern Recognition</h3>
                 </div>
-                <p className="text-white text-sm opacity-80">
+                <p className="text-white text-xs sm:text-sm opacity-80">
                   Our AI identifies correlations across disparate data sources that human analysts often miss
                 </p>
               </div>
@@ -240,12 +240,12 @@ export default function WebScraperView() {
               <CardTitle className="text-white text-lg">Summary Analysis</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-white">
+              <p className="text-white text-sm sm:text-base">
                 Based on your query <span className="text-[#00ff4c] font-medium">"{searchQuery}"</span>, our AI has
                 analyzed multiple sources and extracted the following insights:
               </p>
               <div className="mt-4 p-3 bg-[#00ff4c10] border border-[#00ff4c33] rounded-md">
-                <p className="text-white">
+                <p className="text-white text-sm sm:text-base">
                   The data suggests significant activity in this area with multiple corroborating sources. Key findings
                   indicate potential opportunities with moderate risk factors. Sentiment analysis shows a generally
                   positive outlook from institutional investors.
@@ -260,15 +260,15 @@ export default function WebScraperView() {
               <Card key={index} className="bg-black/50 border-[#00ff4c33] backdrop-blur-sm">
                 <CardHeader className="pb-2">
                   <div className="flex justify-between items-center">
-                    <CardTitle className="text-white text-lg">{result.title}</CardTitle>
-                    <Badge className={`${result.relevance > 90 ? "bg-green-600" : "bg-yellow-600"}`}>
+                    <CardTitle className="text-white text-base sm:text-lg">{result.title}</CardTitle>
+                    <Badge className={`${result.relevance > 90 ? "bg-green-600" : "bg-yellow-600"} text-xs sm:text-sm`}>
                       {result.relevance}% Relevance
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-white mb-4">{result.content}</p>
-                  <div className="flex justify-between items-center text-sm text-gray-400">
+                  <p className="text-white text-sm sm:text-base mb-4">{result.content}</p>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-sm text-gray-400 gap-2 sm:gap-0">
                     <span>Source: {result.source}</span>
                     <span>{result.timestamp}</span>
                   </div>
@@ -278,12 +278,12 @@ export default function WebScraperView() {
           </div>
         </div>
       ) : (
-        <div className="flex-1 flex flex-col items-center justify-center text-center p-6 bg-black/30 border border-[#00ff4c33] rounded-lg">
+        <div className="flex-1 flex flex-col items-center justify-center text-center p-4 sm:p-6 bg-black/30 border border-[#00ff4c33] rounded-lg">
           <div className="text-[#00ff4c] mb-4">
             <Search size={48} className="mx-auto opacity-50" />
           </div>
           <h3 className="text-xl font-medium text-white mb-2">No Results Yet</h3>
-          <p className="text-white text-opacity-70 max-w-md">
+          <p className="text-white text-opacity-70 max-w-md text-sm sm:text-base">
             Enter a query above and click Search to analyze financial data from across the web. Try one of our suggested
             prompts to get started.
           </p>

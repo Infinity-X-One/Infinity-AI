@@ -33,17 +33,11 @@ interface SidebarProps {
   setCurrentView: (
     view: "chat" | "predictions" | "analyze" | "short-strategy" | "option-strategy" | "critical-news" | "web-scraper",
   ) => void
-  currentView:
-    | "chat"
-    | "predictions"
-    | "analyze"
-    | "short-strategy"
-    | "option-strategy"
-    | "critical-news"
-    | "web-scraper"
+  currentView: string
+  className?: string
 }
 
-export default function Sidebar({ setCurrentView, currentView }: SidebarProps) {
+export default function Sidebar({ setCurrentView, currentView, className = "" }: SidebarProps) {
   const [chats, setChats] = useState([{ id: 1, name: "New Chat 1" }])
   const isMobile = useMobile()
   const router = useRouter()
@@ -158,7 +152,7 @@ export default function Sidebar({ setCurrentView, currentView }: SidebarProps) {
   }
 
   return (
-    <div className="flex flex-col h-full bg-black border-r border-[#00ff4c33] overflow-y-auto pt-[53px] relative">
+    <div className={`w-64 h-full bg-black border-r border-[#00ff4c33] overflow-y-auto pt-[53px] relative ${className}`}>
       <div className="absolute inset-0 bg-black z-0"></div>
 
       {/* Top padding */}

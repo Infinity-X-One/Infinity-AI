@@ -108,7 +108,7 @@ export default function SafeBetsChat() {
 
   return (
     <div
-      className={`fixed bottom-0 right-4 z-30 w-80 md:w-96 bg-black border border-[#00ff4c33] rounded-t-lg shadow-lg shadow-[#00ff4c22] transition-all duration-300 ease-in-out ${
+      className={`fixed bottom-0 right-0 sm:right-4 z-30 w-full sm:w-80 md:w-96 bg-black border border-[#00ff4c33] rounded-t-lg shadow-lg shadow-[#00ff4c22] transition-all duration-300 ease-in-out ${
         isExpanded ? "h-[400px] md:h-[500px]" : "h-12"
       }`}
     >

@@ -10,11 +10,9 @@ export default function ProofPage() {
       <div className="flex-1 overflow-auto">
         <Header
           isSidebarOpen={true}
-          setIsSidebarOpen={() => {}}
+          // Remove function props that cause server/client issues
           selectedBot="Infinity AI"
-          setSelectedBot={() => {}}
           selectedModel="OpenAI"
-          setSelectedModel={() => {}}
         />
         <PortfolioTicker />
         <ProofInterface />

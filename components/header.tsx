@@ -9,11 +9,11 @@ import { useRouter } from "next/navigation"
 
 interface HeaderProps {
   isSidebarOpen: boolean
-  setIsSidebarOpen: (open: boolean) => void
+  setIsSidebarOpen?: (open: boolean) => void
   selectedBot: string
-  setSelectedBot: (bot: string) => void
+  setSelectedBot?: (bot: string) => void
   selectedModel: string
-  setSelectedModel: (model: string) => void
+  setSelectedModel?: (model: string) => void
 }
 
 export function Header({
@@ -64,7 +64,7 @@ export function Header({
               {models.map((model) => (
                 <DropdownMenuItem
                   key={model}
-                  onClick={() => setSelectedModel(model)}
+                  onClick={() => setSelectedModel && setSelectedModel(model)}
                   className="text-white hover:text-[#00ff4c] hover:bg-[#00ff4c15] cursor-pointer py-2"
                 >
                   {model}

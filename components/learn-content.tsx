@@ -87,18 +87,22 @@ export default function LearnContent() {
       {/* Featured course */}
       <div className="mb-8 rounded-xl border border-[#00ff4c33] bg-black/60 backdrop-blur-sm overflow-hidden relative">
         <div className="absolute inset-0 bg-gradient-to-r from-[#00ff4c10] to-transparent pointer-events-none"></div>
-        <div className="p-6 flex flex-col md:flex-row items-start gap-6">
+        <div className="p-4 sm:p-6 flex flex-col md:flex-row items-start gap-4 sm:gap-6">
           <div className="w-full md:w-2/3">
-            <h2 className="text-2xl font-bold text-white mb-2">Master the Markets: Complete Trading Course</h2>
-            <p className="text-gray-300 mb-4">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
+              Master the Markets: Complete Trading Course
+            </h2>
+            <p className="text-gray-300 mb-4 text-sm sm:text-base">
               Learn everything from basic concepts to advanced trading strategies in this comprehensive course.
             </p>
-            <div className="flex flex-wrap gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full bg-[#00ff4c20] text-[#00ff4c] text-xs font-medium">
+            <div className="flex flex-wrap gap-2 sm:gap-3 mb-4">
+              <span className="px-2 sm:px-3 py-1 rounded-full bg-[#00ff4c20] text-[#00ff4c] text-xs font-medium">
                 20+ Lessons
               </span>
-              <span className="px-3 py-1 rounded-full bg-[#00ff4c20] text-[#00ff4c] text-xs font-medium">5 Hours</span>
-              <span className="px-3 py-1 rounded-full bg-[#00ff4c20] text-[#00ff4c] text-xs font-medium">
+              <span className="px-2 sm:px-3 py-1 rounded-full bg-[#00ff4c20] text-[#00ff4c] text-xs font-medium">
+                5 Hours
+              </span>
+              <span className="px-2 sm:px-3 py-1 rounded-full bg-[#00ff4c20] text-[#00ff4c] text-xs font-medium">
                 Beginner to Advanced
               </span>
             </div>
@@ -107,8 +111,8 @@ export default function LearnContent() {
               <span className="relative z-10">Start Learning</span>
             </Button>
           </div>
-          <div className="w-full md:w-1/3 h-40 rounded-lg bg-[#00ff4c10] flex items-center justify-center">
-            <BookOpen className="h-16 w-16 text-[#00ff4c] opacity-50" />
+          <div className="w-full md:w-1/3 h-32 sm:h-40 rounded-lg bg-[#00ff4c10] flex items-center justify-center">
+            <BookOpen className="h-12 sm:h-16 w-12 sm:w-16 text-[#00ff4c] opacity-50" />
           </div>
         </div>
       </div>
@@ -144,8 +148,8 @@ export default function LearnContent() {
                       key={article.id}
                       className="flex items-center justify-between p-2 rounded-lg hover:bg-[#00ff4c15] transition-colors duration-200"
                     >
-                      <span className="text-white">{article.title}</span>
-                      <span className="text-xs text-gray-400">{article.duration}</span>
+                      <span className="text-white text-sm sm:text-base truncate mr-2">{article.title}</span>
+                      <span className="text-xs text-gray-400 whitespace-nowrap">{article.duration}</span>
                     </div>
                   ))}
                 </div>
@@ -157,24 +161,24 @@ export default function LearnContent() {
 
       {/* Recent articles */}
       <h3 className="text-xl font-bold text-white mb-4">Recent Articles</h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {[1, 2, 3].map((i) => (
           <div
             key={i}
             className="rounded-xl border border-[#00ff4c33] bg-black/60 backdrop-blur-sm overflow-hidden hover:border-[#00ff4c] transition-colors duration-200 cursor-pointer"
           >
-            <div className="h-40 bg-[#00ff4c10] flex items-center justify-center">
+            <div className="h-32 sm:h-40 bg-[#00ff4c10] flex items-center justify-center">
               <Lightbulb className="h-10 w-10 text-[#00ff4c] opacity-50" />
             </div>
             <div className="p-4">
-              <h4 className="text-lg font-semibold text-white mb-2">
+              <h4 className="text-lg font-semibold text-white mb-2 line-clamp-2">
                 {i === 1
                   ? "Market Psychology: Understanding Fear and Greed"
                   : i === 2
                     ? "Top 5 Technical Indicators for Day Trading"
                     : "Risk Management: Protecting Your Capital"}
               </h4>
-              <p className="text-gray-300 text-sm mb-3">
+              <p className="text-gray-300 text-sm mb-3 line-clamp-3">
                 {i === 1
                   ? "Learn how emotions drive market movements and how to use this to your advantage."
                   : i === 2

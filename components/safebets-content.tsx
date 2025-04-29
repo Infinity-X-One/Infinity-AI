@@ -488,7 +488,9 @@ const SafeBetsContent = forwardRef((props, ref) => {
               <Button className="w-full bg-black/50 border-[#00ff4c33] text-white hover:bg-[#00ff4c15] hover:border-[#00ff4c] flex justify-between h-12">
                 <div className="flex items-center">
                   <Filter size={16} className="mr-2 text-[#00ff4c]" />
-                  <span>Category: {selectedCategory === "all" ? "All" : selectedCategory.toUpperCase()}</span>
+                  <span className="truncate">
+                    Category: {selectedCategory === "all" ? "All" : selectedCategory.toUpperCase()}
+                  </span>
                 </div>
                 <ChevronDown size={16} />
               </Button>
@@ -538,7 +540,7 @@ const SafeBetsContent = forwardRef((props, ref) => {
               <Button className="w-full bg-black/50 border-[#00ff4c33] text-white hover:bg-[#00ff4c15] hover:border-[#00ff4c] flex justify-between h-12">
                 <div className="flex items-center">
                   <TrendingUp size={16} className="mr-2 text-[#00ff4c]" />
-                  <span>
+                  <span className="truncate">
                     Sort: {sortBy === "confidence" ? "Confidence" : sortBy === "expectedReturn" ? "Return" : sortBy}
                   </span>
                 </div>
@@ -622,9 +624,9 @@ const SafeBetsContent = forwardRef((props, ref) => {
 
         <Card className="bg-black/50 border-[#00ff4c33] backdrop-blur-sm">
           <CardContent className="p-4">
-            <div className="flex justify-between items-center">
-              <span className="text-[#00ff4c] text-sm">Risk Level</span>
-              <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+              <span className="text-[#00ff4c] text-sm mb-2 sm:mb-0">Risk Level</span>
+              <div className="flex flex-wrap gap-2">
                 <Badge
                   className={`cursor-pointer ${
                     riskFilter === "all" ? "bg-[#00ff4c] text-black" : "bg-black/50 text-white"
@@ -664,9 +666,9 @@ const SafeBetsContent = forwardRef((props, ref) => {
 
         <Card className="bg-black/50 border-[#00ff4c33] backdrop-blur-sm">
           <CardContent className="p-4">
-            <div className="flex justify-between items-center">
-              <span className="text-[#00ff4c] text-sm">Timeframe</span>
-              <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+              <span className="text-[#00ff4c] text-sm mb-2 sm:mb-0">Timeframe</span>
+              <div className="flex flex-wrap gap-2">
                 <Badge
                   className={`cursor-pointer ${
                     timeframeFilter === "all" ? "bg-[#00ff4c] text-black" : "bg-black/50 text-white"
@@ -681,7 +683,7 @@ const SafeBetsContent = forwardRef((props, ref) => {
                   }`}
                   onClick={() => setTimeframeFilter("short-term")}
                 >
-                  Short-term
+                  Short
                 </Badge>
                 <Badge
                   className={`cursor-pointer ${
@@ -689,7 +691,7 @@ const SafeBetsContent = forwardRef((props, ref) => {
                   }`}
                   onClick={() => setTimeframeFilter("mid-term")}
                 >
-                  Mid-term
+                  Mid
                 </Badge>
                 <Badge
                   className={`cursor-pointer ${
@@ -697,7 +699,7 @@ const SafeBetsContent = forwardRef((props, ref) => {
                   }`}
                   onClick={() => setTimeframeFilter("long-term")}
                 >
-                  Long-term
+                  Long
                 </Badge>
               </div>
             </div>
@@ -744,7 +746,7 @@ const SafeBetsContent = forwardRef((props, ref) => {
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <div className="text-white font-bold text-lg">{bet.symbol}</div>
-                    <div className="text-gray-400 text-xs">{bet.name}</div>
+                    <div className="text-gray-400 text-xs truncate max-w-[150px]">{bet.name}</div>
                   </div>
                   <Badge className={getRiskColor(bet.risk)}>{bet.risk}</Badge>
                 </div>
@@ -786,14 +788,14 @@ const SafeBetsContent = forwardRef((props, ref) => {
               <CardHeader className="pb-2">
                 <div className="flex justify-between items-center">
                   <div>
-                    <CardTitle className="text-white text-2xl flex items-center">
+                    <CardTitle className="text-white text-xl sm:text-2xl flex items-center flex-wrap gap-2">
                       {selectedBet.symbol}
-                      <Badge className="ml-2 text-xs">{selectedBet.category.toUpperCase()}</Badge>
+                      <Badge className="text-xs">{selectedBet.category.toUpperCase()}</Badge>
                     </CardTitle>
-                    <div className="text-gray-400">{selectedBet.name}</div>
+                    <div className="text-gray-400 text-sm truncate">{selectedBet.name}</div>
                   </div>
                   <div className="flex flex-col items-end">
-                    <div className="text-white text-xl font-bold">${selectedBet.price.toLocaleString()}</div>
+                    <div className="text-white text-lg sm:text-xl font-bold">${selectedBet.price.toLocaleString()}</div>
                     <div className={`flex items-center ${selectedBet.change >= 0 ? "text-green-400" : "text-red-400"}`}>
                       <ArrowUpRight size={16} className={selectedBet.change < 0 ? "rotate-180" : ""} />
                       {selectedBet.change >= 0 ? "+" : ""}
@@ -830,19 +832,19 @@ const SafeBetsContent = forwardRef((props, ref) => {
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div className="bg-black/70 p-3 rounded-md border border-[#00ff4c33]">
                           <div className="text-[#00ff4c] text-xs mb-1">Confidence Score</div>
-                          <div className="text-white text-2xl font-bold">{selectedBet.confidence}%</div>
+                          <div className="text-white text-lg sm:text-2xl font-bold">{selectedBet.confidence}%</div>
                         </div>
                         <div className="bg-black/70 p-3 rounded-md border border-[#00ff4c33]">
                           <div className="text-[#00ff4c] text-xs mb-1">Risk Level</div>
-                          <div className="text-white text-2xl font-bold capitalize">{selectedBet.risk}</div>
+                          <div className="text-white text-lg sm:text-2xl font-bold capitalize">{selectedBet.risk}</div>
                         </div>
                         <div className="bg-black/70 p-3 rounded-md border border-[#00ff4c33]">
                           <div className="text-[#00ff4c] text-xs mb-1">Expected Return</div>
-                          <div className="text-white text-2xl font-bold">+{selectedBet.expectedReturn}%</div>
+                          <div className="text-white text-lg sm:text-2xl font-bold">+{selectedBet.expectedReturn}%</div>
                         </div>
                         <div className="bg-black/70 p-3 rounded-md border border-[#00ff4c33]">
                           <div className="text-[#00ff4c] text-xs mb-1">Timeframe</div>
-                          <div className="text-white text-2xl font-bold capitalize">
+                          <div className="text-white text-lg sm:text-2xl font-bold capitalize">
                             {selectedBet.timeframe.replace("-", " ")}
                           </div>
                         </div>
@@ -850,12 +852,12 @@ const SafeBetsContent = forwardRef((props, ref) => {
 
                       <div className="bg-black/70 p-4 rounded-md border border-[#00ff4c33]">
                         <h3 className="text-[#00ff4c] font-medium mb-2">Analysis</h3>
-                        <p className="text-white">{selectedBet.description}</p>
+                        <p className="text-white text-sm sm:text-base">{selectedBet.description}</p>
                       </div>
 
                       <div className="bg-black/70 p-4 rounded-md border border-[#00ff4c33]">
                         <h3 className="text-[#00ff4c] font-medium mb-2">Key Factors</h3>
-                        <ul className="space-y-2 text-white">
+                        <ul className="space-y-2 text-white text-sm sm:text-base">
                           <li className="flex items-start">
                             <div className="text-[#00ff4c] mr-2">•</div>
                             <span>Strong technical indicators with multiple confirmation signals</span>
@@ -914,7 +916,7 @@ const SafeBetsContent = forwardRef((props, ref) => {
                     <div className="mt-4 grid grid-cols-2 gap-4">
                       <div className="bg-black/70 p-3 rounded-md border border-[#00ff4c33]">
                         <div className="text-[#00ff4c] text-xs mb-1">Price Range (30d)</div>
-                        <div className="text-white">
+                        <div className="text-white text-sm">
                           ${Math.min(...selectedBet.historicalData.map((d) => d.price)).toFixed(2)} - $
                           {Math.max(...selectedBet.historicalData.map((d) => d.price)).toFixed(2)}
                         </div>
@@ -943,7 +945,7 @@ const SafeBetsContent = forwardRef((props, ref) => {
 
                   <TabsContent value="metrics">
                     <div className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="bg-black/70 p-4 rounded-md border border-[#00ff4c33]">
                           <div className="flex justify-between items-center mb-2">
                             <span className="text-[#00ff4c]">Volatility</span>
@@ -985,7 +987,7 @@ const SafeBetsContent = forwardRef((props, ref) => {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="bg-black/70 p-4 rounded-md border border-[#00ff4c33]">
                           <div className="flex justify-between items-center mb-2">
                             <span className="text-[#00ff4c]">Stability</span>
