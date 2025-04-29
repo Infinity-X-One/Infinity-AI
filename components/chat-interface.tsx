@@ -140,7 +140,7 @@ export default function ChatInterface() {
         <Sidebar setCurrentView={handleViewChange} currentView={currentView} />
       </div>
 
-      <div className="flex flex-col flex-1 h-full overflow-hidden">
+      <div className="flex flex-col flex-1 w-full h-full overflow-hidden">
         <Header
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
@@ -150,7 +150,7 @@ export default function ChatInterface() {
           setSelectedModel={setSelectedModel}
         />
 
-        <div className="flex-1 overflow-hidden pt-[53px] bg-black">
+        <div className="flex-1 overflow-hidden pt-[53px] bg-black w-full">
           {isViewLoading ? (
             <LoadingScreen />
           ) : (

@@ -100,7 +100,7 @@ export default function GlobalHeader({ toggleSidebar, selectedModel = "OpenAI", 
               <ChevronDown size={14} className="ml-1 sm:ml-2" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-black border-[#00ff4c33]">
+          <DropdownMenuContent className="bg-black border-[#00ff4c33] w-48 right-0 left-auto">
             {accounts.map((account) => (
               <DropdownMenuItem
                 key={account.name}

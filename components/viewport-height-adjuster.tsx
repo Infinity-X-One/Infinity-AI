@@ -6,17 +6,17 @@ export function ViewportHeightAdjuster() {
   useEffect(() => {
     // Function to update the viewport height
     const updateViewportHeight = () => {
-      // Set a CSS variable with the actual viewport height
-      document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`)
+      // Get the viewport height
+      const vh = window.innerHeight * 0.01
+      // Set the value in the --vh custom property to the root of the document
+      document.documentElement.style.setProperty("--vh", `${vh}px`)
     }
 
-    // Initial update
+    // Update the height on first load
     updateViewportHeight()
 
-    // Update on resize
+    // Add event listener for resize and orientation change
     window.addEventListener("resize", updateViewportHeight)
-
-    // Update on orientation change
     window.addEventListener("orientationchange", updateViewportHeight)
 
     // Clean up

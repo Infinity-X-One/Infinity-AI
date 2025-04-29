@@ -168,7 +168,7 @@ export default function ChatArea({ selectedModel }: ChatAreaProps) {
   }
 
   return (
-    <div className="flex flex-col h-full chat-area">
+    <div className="flex flex-col h-full w-full chat-area">
       <div className="hexagon-grid"></div>
       <div className="hexagon-overlay"></div>
       <div className="hexagon-glow"></div>
@@ -177,7 +177,7 @@ export default function ChatArea({ selectedModel }: ChatAreaProps) {
       </div>
       {/* Empty state or welcome screen */}
       {messages.length === 0 ? (
-        <div className="flex flex-col items-center justify-center flex-1 p-4">
+        <div className="flex flex-col items-center justify-center flex-1 p-4 w-full">
           <div className="text-4xl font-bold text-[#00ff4c] mb-4 drop-shadow-[0_0_10px_rgba(0,255,76,0.8)]">
             <div className="flex items-center gap-2">
               <Infinity size={36} className="text-[#00ff4c]" />
@@ -214,13 +214,13 @@ export default function ChatArea({ selectedModel }: ChatAreaProps) {
       ) : (
         <>
           {/* Chat messages */}
-          <div className="flex-1 overflow-y-auto p-2 sm:p-4">
+          <div className="flex-1 overflow-y-auto p-2 sm:p-4 w-full">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex items-start mb-3 sm:mb-4 ${
                   message.role === "assistant" ? "bg-[#00ff4c0a]" : ""
-                } p-2 sm:p-3 rounded-lg`}
+                } p-2 sm:p-3 rounded-lg w-full`}
               >
                 {message.role === "assistant" && (
                   <div className="mr-3 sm:mr-4 text-[#00ff4c] drop-shadow-[0_0_8px_rgba(0,255,76,0.8)] flex-shrink-0">
@@ -241,7 +241,7 @@ export default function ChatArea({ selectedModel }: ChatAreaProps) {
           </div>
 
           {/* Quick action buttons - scrollable on mobile */}
-          <div className="flex justify-center gap-2 sm:gap-3 my-2 sm:my-4 px-2 overflow-x-auto pb-2 hide-scrollbar">
+          <div className="flex justify-center gap-2 sm:gap-3 my-2 sm:my-4 px-2 overflow-x-auto pb-2 hide-scrollbar w-full">
             <ToolButton
               icon={<Search className="w-4 h-4 mr-2 text-[#00ff4c]" />}
               label="Web Scraper"
@@ -274,7 +274,7 @@ export default function ChatArea({ selectedModel }: ChatAreaProps) {
       )}
 
       {/* Input area */}
-      <div className="border-t border-[#00ff4c33] p-2 sm:p-4 pb-20 sm:pb-4">
+      <div className="border-t border-[#00ff4c33] p-2 sm:p-4 pb-20 sm:pb-4 w-full">
         <div className="relative">
           <textarea
             ref={textareaRef}
